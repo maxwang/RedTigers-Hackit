@@ -167,6 +167,11 @@ Email: 	m0nsterk1ll
  The password for the next level is: dont_shout_at_your_disks*** 
  
 7. Level 7 : SQL-Injection
+  On valide le formulaire de recherche avec dans le champ de saisie la chaine bidon'
+  On obtient la requête utilisée :
+```SQL
+SELECT news.*,text.text,text.title FROM level7_news news, level7_texts text WHERE text.id = news.id AND (text.text LIKE '%bidon'%' OR text.title LIKE '%bidon'%')
+```
 8. Level 8 : SQL-Injection
 9. Level 9 : SQL-Injection
 10. Level 10
