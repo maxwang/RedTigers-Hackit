@@ -253,3 +253,21 @@ text2
 The password for the next level is: dont_throw_bottles 
 
 ##Level 10
+
+le champ caché "login" contient une chaine encodée en base64 :
+```
+base64 :
+YToyOntzOjg6InVzZXJuYW1lIjtzOjY6Ik1vbmtleSI7czo4OiJwYXNzd29yZCI7czoxMjoiMDgxNXBhc3N3b3JkIjt9
+valeur décodée :
+a:2:{s:8:"username";s:6:"Monkey";s:8:"password";s:12:"0815password";}
+```
+Il s'agit d'une valeur php sérialisée (http://php.net/manual/fr/function.serialize.php)
+On change le nom d'utilisateur par TheMaster (et la taille), on met le mot de passe en booléen vrai
+```
+a:2:{s:8:"username";s:9:"TheMaster";s:8:"password";b:1;}
+```
+ Welcome TheMaster.
+
+You solved the hackit :)
+
+The password for the hall of fame is: random_stuff_is_random 
